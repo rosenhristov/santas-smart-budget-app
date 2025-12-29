@@ -33,25 +33,29 @@ Each phase is documented and committed separately.
 
 Backend (Express + JSON file storage):
 1. In PowerShell:
-   - cd backend
-   - npm i
-   - npm start
+```bash
+   cd backend
+   npm i
+   npm start
+```
 2. The API runs on http://localhost:4000
 3. Endpoints:
-   - GET /health
-   - GET /transactions
-   - POST /transactions
-   - PUT /transactions/:id
-   - DELETE /transactions/:id
-   - POST /advisor (optional AI advice)
+```bash
+   GET /health
+   GET /transactions
+   POST /transactions
+   PUT /transactions/:id
+   DELETE /transactions/:id
+   POST /advisor (optional AI advice)
+```
 4. Persistence: Transactions are stored in `backend/data/transactions.json` (created automatically). Override path via env var `DATA_FILE` if needed.
 5. Optional: Set `OPENAI_API_KEY` in environment to enable AI-generated advice; otherwise heuristic advice is used.
 
 Environment variables (PowerShell examples):
 - Enable OpenAI-powered advisor
-  - $env:OPENAI_API_KEY = "YOUR_KEY"; npm start
+  - `$env:OPENAI_API_KEY = "YOUR_KEY"; npm start`
 - Custom data file location
-  - $env:DATA_FILE = "C:\\path\\to\\transactions.json"; npm start
+  - `$env:DATA_FILE = "C:\\path\\to\\transactions.json"; npm start`
 
 CORS and Advisor endpoint URL:
 - CORS is enabled in development (origin: true). Browser apps on http://localhost:5173 can call the API at http://localhost:4000.
@@ -59,9 +63,11 @@ CORS and Advisor endpoint URL:
 
 Frontend (React + Vite):
 1. In a new terminal:
-   - cd frontend
-   - npm i
-   - npm run dev
+```bash
+   cd frontend
+   npm i
+   npm run dev
+```
 2. Open the shown localhost URL (e.g., http://localhost:5173). The app will load transactions from the backend and save new ones via the API.
    - Ensure the backend is running on http://localhost:4000. The frontend in this project calls fixed URLs (http://localhost:4000/transactions and http://localhost:4000/advisor).
 
