@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import TransactionForm from "./components/TransactionForm";
 import TransactionList from "./components/TransactionList";
 import Summary from "./components/Summary";
@@ -8,8 +9,28 @@ import Advisor from "./components/Advisor";
 export default function App() {
   const [transactions, setTransactions] = useState([]);
 
-  const handleAdd = (tx) => {
-    setTransactions((prev) => [tx, ...prev]);
+  // Load initial transactions from backend
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await axios.get("http://localhost:4000/transactions");
+        if (!cancelled) setTransactions(res.data || []);
+      } catch (e) {
+        console.error("Failed to load transactions:", e);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
+  const handleAdd = async (tx) => {
+    try {
+      const res = await axios.post("http://localhost:4000/transactions", tx);
+      const saved = res.data;
+      setTransactions((prev) => [saved, ...prev]);
+    } catch (e) {
+      console.error("Failed to save transaction:", e);
+    }
   };
 
   return (

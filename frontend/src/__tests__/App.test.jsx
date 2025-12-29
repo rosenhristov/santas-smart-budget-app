@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import App from '../App.jsx';
 
 vi.mock('axios', () => ({
-  default: { post: vi.fn() }
+  default: { get: vi.fn(), post: vi.fn() }
 }));
 import axios from 'axios';
 
@@ -16,6 +16,22 @@ vi.mock('../components/ExpenseChart.jsx', () => ({
 describe('App integration', () => {
   it('adds a transaction and shows advisor suggestion', async () => {
     const user = userEvent.setup();
+
+    // First, App loads transactions on mount
+    axios.get.mockResolvedValueOnce({ data: [] });
+
+    // Mock POST /transactions (first post call) returning the created transaction
+    const createdTx = {
+      id: 'tx-1',
+      type: 'expense',
+      amount: 123,
+      category: 'Decorations',
+      description: 'Lights',
+      date: '2024-12-01T00:00:00.000Z'
+    };
+    axios.post.mockResolvedValueOnce({ data: createdTx });
+
+    // Mock POST /advisor (second post call) returning suggestion
     axios.post.mockResolvedValueOnce({ data: { suggestion: 'Advice here.' } });
 
     render(<App />);
