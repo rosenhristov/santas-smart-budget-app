@@ -23,7 +23,7 @@ Create a Christmas-themed budget management application that allows users to tra
 - Display summaries and visual charts of spending
   o (e.g. “Gift Budget Used”, “Holiday Expenses Breakdown”)
 - (Optional) Provide AI-based suggestions
-  o (e.g. “You’ve spent too much on decorations — consider reallocating to gifts ��”)
+  o (e.g. “You’ve spent too much on decorations — consider reallocating to gifts 🎁”)
 - Or use the Brainstorming tool to create your own festive vision for the project
   Creativity is encouraged — the core requirement is functionality and structure, not design  polish.
 
