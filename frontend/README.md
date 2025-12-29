@@ -1,16 +1,65 @@
-# React + Vite
+# Santa’s Smart Budget App — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite app that connects to the backend API to manage holiday income and expenses. It shows a live summary, a pie chart of expenses by category, and an AI budgeting advisor button.
 
-Currently, two official plugins are available:
+## Requirements
+- Node.js 18+ and npm
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Getting started
+1. Install dependencies
+   ```powershell
+   cd frontend
+   npm install
+   ```
+2. Start the dev server (default: http://localhost:5173)
+   ```powershell
+   npm run dev
+   ```
+3. Open the URL printed by Vite. Ensure the backend is running at `http://localhost:4000`.
 
-## React Compiler
+## Backend connection
+- API URLs are hardcoded for local development:
+  - Transactions: `http://localhost:4000/transactions`
+  - Advisor: `http://localhost:4000/advisor`
+- If the backend runs on a different host/port, update these in:
+  - `src\App.jsx`
+  - `src\components\Advisor.jsx`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Available scripts
+```json
+{
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview",
+  "lint": "eslint .",
+  "test": "vitest run",
+  "test:watch": "vitest"
+}
+```
 
-## Expanding the ESLint configuration
+## Testing
+Run tests with Vitest and Testing Library:
+```powershell
+npm test
+```
+- Axios calls are mocked; the backend is not required for tests.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+- Add transactions (income/expense) with category and description
+- View summary of income, expenses, and balance
+- Visualize expenses by category using Recharts (pie chart)
+- Request budgeting advice via the Advisor button (`POST /advisor`)
+
+## Troubleshooting
+- Start the backend first at `http://localhost:4000`.
+- If using a different API port, update URLs in `App.jsx` and `components\Advisor.jsx`.
+- CORS is enabled on the backend for dev (`cors({ origin: true })`).
+- Empty chart? Add at least one expense transaction.
+
+## Production build
+```powershell
+npm run build
+npm run preview  # preview the production build locally
+```
+
+For deployment with a different API host, consider using a Vite environment variable like `VITE_API_BASE` and reading it via `import.meta.env`. The current project keeps fixed URLs for simplicity.
