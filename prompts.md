@@ -1769,3 +1769,12 @@ Outcome:
 - Appended this conversation snapshot to prompts.md to maintain chronological chat history per BMAD requirement.
 
 
+Make backend and frontend README.md files more informative
+
+The backend README file was updated with detailed information about the Node.js API, 
+its requirements, setup instructions, environment variables, data persistence, 
+API endpoints, CORS configuration, testing, and example requests.
+
+The frontend README file was updated with a detailed description of the Santa’s Smart Budget App, including setup 
+instructions, backend connection details, available scripts, testing guidance, features, troubleshooting tips, 
+and production build information.
