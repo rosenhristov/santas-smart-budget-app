@@ -1,7 +1,8 @@
 # prompts.md
 
-Santa’s Smart Budget App
-Brief: Santa is preparing for Christmas, and managing the budget for gifts, elves, reindeer care, and holiday logistics has become a serious challenge.
+# Santa’s Smart Budget App
+## Brief: 
+Santa is preparing for Christmas, and managing the budget for gifts, elves, reindeer care, and holiday logistics has become a serious challenge.
 Your task is to build a fully functional web application that helps Santa (and everyday users) manage expenses and income during the holiday season — Santa’s Smart Budget App.
 
 The goal of this exam is to:
@@ -9,10 +10,10 @@ The goal of this exam is to:
 - Use Claude Code or OpenAI Codex as AI-assisted tools for coding, debugging, planning, and documentation
 - Demonstrate how an AI-First Developer works using structured thinking and AI support to deliver clean, maintainable software.
 
-Project Description
+## Project Description
 Create a Christmas-themed budget management application that allows users to track and  manage their holiday finances. The app should demonstrate your understanding of BMAD methodology.
 
-The application should allow users to:
+## The application should allow users to:
 - Add income and expense records
   o (e.g. Bonus, Salary, Gift Budget, Decorations, Travel)
 
@@ -26,7 +27,7 @@ The application should allow users to:
 - Or use the Brainstorming tool to create your own festive vision for the project
   Creativity is encouraged — the core requirement is functionality and structure, not design  polish.
 
-Requirements
+## Requirements
 1. BMAD Method Application
    The project must follow the four phases of the Breakthrough Method for Agile
    Development (BMAD): Analysis, Planning, Solutioning, Implementation
@@ -43,6 +44,7 @@ Requirements
 - How AI affected your speed or code quality
 - What custom settings have you made (if any)
 - What problems youve handled during the development
+
 
 По-долу е пълен, практически изпълним blueprint за Santa’s Smart Budget App, структуриран точно по BMAD, така че да можеш директно да го качиш като изпитен проект в GitHub и да покриеш всички изисквания.
 
@@ -569,7 +571,7 @@ Add this at the end of prompts.md:
 2️⃣ Frontend Bootstrap (React + Vite)
 
 From repo root:
-```
+```bash
 cd frontend
 npm create vite@latest . -- --template react
 npm install
@@ -601,7 +603,7 @@ frontend/src/
 
 4️⃣ Core Domain Constants
 src/data/categories.js
-```
+```javascript
 export const CATEGORIES = [
 "Gifts",
 "Food & Dinner",
@@ -613,7 +615,7 @@ export const CATEGORIES = [
 ```
 5️⃣ TransactionForm Component
 src/components/TransactionForm.jsx
-```
+```javascript
 import { useState } from "react";
 import { CATEGORIES } from "../data/categories";
 import { v4 as uuid } from "uuid";
@@ -677,7 +679,7 @@ feat(frontend): add transaction form
 
 6️⃣ Transaction List
 src/components/TransactionList.jsx
-```
+```javascript
 export default function TransactionList({ transactions }) {
 return (
 <ul>
@@ -697,7 +699,7 @@ feat(frontend): add transaction list
 
 7️⃣ Summary Component
 src/components/Summary.jsx
-```
+```javascript
 export default function Summary({ transactions }) {
 const income = transactions
 .filter(t => t.type === "income")
@@ -723,7 +725,7 @@ feat(frontend): add financial summary
 
 8️⃣ Expense Chart
 src/components/ExpenseChart.jsx
-```
+```javascript
 import { PieChart, Pie, Cell, Tooltip } from "recharts";
 
 export default function ExpenseChart({ transactions }) {
@@ -752,7 +754,7 @@ feat(frontend): add expense breakdown chart
 
 9️⃣ App.jsx (Composition Root)
 src/App.jsx
-```
+```javascript
 import { useState } from "react";
 import TransactionForm from "./components/TransactionForm";
 import TransactionList from "./components/TransactionList";
@@ -843,7 +845,7 @@ feat(backend): initialize Express backend with data.json
 
 3️⃣ Express Server
 backend/index.js
-```
+```javascript
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -915,7 +917,7 @@ feat(backend): add CRUD REST API for transactions
 4️⃣ Frontend – Connect to Backend
 
 Update App.jsx to use the backend API:
-```
+```javascript
 import { useState, useEffect } from "react";
 import TransactionForm from "./components/TransactionForm";
 import TransactionList from "./components/TransactionList";
@@ -953,7 +955,7 @@ return (
 ```
 
 Install Axios:
-```
+```bash
 cd frontend
 npm install axios
 ```
@@ -966,13 +968,13 @@ feat(frontend): connect to backend API for persistence
 5️⃣ Testing
 
 Start backend:
-```
+```bash
 cd backend
 node index.js
 ```
 
 Start frontend:
-```
+```bash
 cd frontend
 npm run dev
 ```
@@ -1017,12 +1019,12 @@ We can create a new endpoint /advisor in the Express backend. It will accept all
 For this exam setup, we can use OpenAI API (or mock it locally if not available).
 
 Install OpenAI SDK (optional if you want real AI)
-```
+```bash
 cd backend
 npm install openai
 ```
 backend/index.js – Add AI Advisor
-```
+```javascript
 // At the top
 const { Configuration, OpenAIApi } = require("openai");
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
@@ -1083,7 +1085,7 @@ feat(backend): add AI Budget Advisor endpoint
 
 3️⃣ Frontend – Display Advisor Suggestion
 frontend/src/components/Advisor.jsx
-```
+```javascript
 import { useState } from "react";
 import axios from "axios";
 
@@ -1110,7 +1112,7 @@ return (
 ```
 
 4️⃣ Update App.jsx to Include Advisor
-```
+```javascript
 import Advisor from "./components/Advisor";
 
 // inside App component JSX
@@ -1125,14 +1127,14 @@ feat(frontend): add AI Budget Advisor component
 5️⃣ Testing AI Advisor
 
 Start backend with OpenAI API key (optional):
-```
+```bash
 cd backend
 export OPENAI_API_KEY="YOUR_KEY_HERE"
 node index.js
 ```
 
 Start frontend:
-```
+```bash
 cd frontend
 npm run dev
 ```
@@ -1699,3 +1701,71 @@ Expected: 4 test files, 5 tests passing.
 - No network calls are made during tests. Axios is mocked where needed.
 - Recharts is mocked/stubbed to avoid jsdom limitations (ResizeObserver).
 - Backend work from previous step remains intact; frontend tests are isolated to the frontend workspace.
+
+
+Revert this storing mehanism and implement backend JSON file storage
+
+1. Define backend JSON storage structure and file helpers (atomic read/write).
+- Create backend/data directory and transactions.json with initial [].
+- Implement helper functions: readTransactions(), writeTransactions(list), generateId() (uuid).
+- Ensure atomic writes via fs.writeFile with temp file + rename or writeFile with flag.
+2. Implement REST CRUD endpoints in backend/app.js.
+- GET /transactions: return all.
+- POST /transactions: validate body, assign id/date server-side, append and persist.
+- PUT /transactions/:id: validate, update existing, persist; 404 if not found.
+- DELETE /transactions/:id: remove and persist; 204/200; 404 if not found.
+- Input validation for type, amount, category, description, date.
+3. Revert frontend localStorage persistence and integrate with backend API.
+- Remove localStorage from App.jsx.
+- On mount: GET /transactions.
+- On add: POST /transactions then prepend the returned saved object.
+4. Keep Advisor endpoint as-is (client sends array) for compatibility; optionally enhance later.
+- No change required now; ensure CORS still enabled.
+5. Add backend tests for transactions CRUD.
+- Use createApp({ dataFile: tmpPath }) to avoid mutating real data.
+- Cover GET empty, POST creates, GET returns, PUT updates, DELETE removes, validation errors.
+6. Update documentation to match backend persistence.
+- README.md: run instructions and JSON file persistence notes.
+- summary.md: already consistent; no change needed.
+7. Run and verify.
+- Started backend tests: all green (8 passing).
+- Frontend now fetches/persists via API; manual verification recommended.
+8. Cleanup and commit.
+- Ensure prompts.md capture; commit with BMAD-style messages.
+
+Update the prompts.md by appending the current conversation at the bottom of the file."
+
+Context snapshots noted by user:
+- Project root contains: README.md, backend, docs, frontend, node_modules, package-lock.json, package.json, prompts.md, summary.md
+- Recent files: prompts.md, backend/app.js, backend/test/app.test.js, frontend/src/App.jsx, summary.md, .gitignore, frontend/src/components/Advisor.jsx, backend/index.js, backend/package.json
+
+Reviewed code during session (highlights):
+- backend/index.js: Starts Express server (ESM)
+- backend/app.js: Express app exposing /health, /advisor, and JSON file–backed transactions CRUD
+- backend/test/app.test.js: Mocha/Chai tests for /health and /advisor
+- frontend/src/App.jsx: Loads transactions from backend, posts new ones
+- frontend/src/components/Advisor.jsx: Calls POST /advisor
+- frontend/src/components/{ExpenseChart, Summary, TransactionForm, TransactionList}.jsx
+- frontend/src/__tests__/App.test.jsx: Integration test with axios mocks
+- frontend/src/data/categories.js
+- README.md and summary.md
+
+Commands/actions executed this session:
+- Get-ChildItem -Name: Listed repository contents
+- Get-ChildItem .\\docs | Format-Table -AutoSize: Listed docs files (analysis.md, planning.md, solutioning.md)
+- apply_patch: Updated frontend test App.test.jsx to properly mock axios.get and axios.post
+- apply_patch: Updated README.md with backend/frontend run steps, env var examples (OPENAI_API_KEY, DATA_FILE), CORS details, and endpoints
+- npm --prefix .\\backend test: Ran backend tests — 8 passing
+- npm --prefix .\\frontend test: Initial run showed 1 failing integration test
+- npm --prefix .\\frontend test --silent -- --reporter=dot --run: All 5 frontend tests passing across 4 files (~2.57s)
+- apply_patch: Final README.md refinements applied
+
+Documentation status reported by user:
+- README.md now includes clear run instructions, PowerShell env vars, CORS note, and advisor endpoint URL
+- Architecture documented accurately: backend JSON file persistence + React/Vite frontend
+- summary.md already aligned; no changes required
+
+Outcome:
+- Appended this conversation snapshot to prompts.md to maintain chronological chat history per BMAD requirement.
+
+
