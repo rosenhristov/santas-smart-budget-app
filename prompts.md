@@ -1,8 +1,5 @@
 # prompts.md
 
-This file contains the complete chronological history of prompts
-used during the development of Santa’s Smart Budget App.
-
 Santa’s Smart Budget App
 Brief: Santa is preparing for Christmas, and managing the budget for gifts, elves, reindeer care, and holiday logistics has become a serious challenge.
 Your task is to build a fully functional web application that helps Santa (and everyday users) manage expenses and income during the holiday season — Santa’s Smart Budget App.
@@ -18,7 +15,6 @@ Create a Christmas-themed budget management application that allows users to tra
 The application should allow users to:
 - Add income and expense records
   o (e.g. Bonus, Salary, Gift Budget, Decorations, Travel)
-
 
 
 - Categorize transactions
@@ -1667,3 +1663,39 @@ User answer:
 2. A
 3. Dev env: Node.js v 20.19.6, npm 10.8.2
    (Current directory: C:\\projects-Rosen\\santas-smart-budget-app)"
+
+
+Append current conversation at the bottom of the prompts.md file
+
+Context snapshots referenced by the user:
+- Project structure at root: README.md, backend, docs, frontend, node_modules, package-lock.json, package.json, prompts.md, summary.md
+- Recent files: C:\\projects-Rosen\\santas-smart-budget-app\\prompts.md, backend/app.js, backend/test/app.test.js, frontend/src/App.jsx, summary.md, .gitignore, frontend/src/components/Advisor.jsx, backend/index.js, backend/package.json
+
+Frontend tests summary provided by user:
+### Summary
+- Added a full frontend testing setup and implemented tests for key UI components and integration flows.
+
+### What I added/changed (frontend)
+- Configured Vitest + React Testing Library with jsdom
+  - frontend/package.json: added test scripts and devDependencies (vitest, @testing-library/*, jsdom).
+  - frontend/vite.config.js: added test block (environment: jsdom, setupFiles, globals).
+  - frontend/src/setupTests.js: enabled jest-dom and stubbed ResizeObserver for Recharts.
+- New tests
+  - Advisor.test.jsx: mocks axios; verifies success path (renders suggestion) and error path (shows error message).
+  - Summary.test.jsx: verifies income, expenses, and balance calculations and rendering.
+  - TransactionForm.test.jsx: mocks uuid; simulates user inputs and submit; checks onAdd payload and input resets.
+  - App.test.jsx: integration test; mocks ExpenseChart and axios; adds a transaction and verifies it appears; checks advisor suggestion rendering.
+
+### How to run frontend tests
+1) In PowerShell:
+```
+  cd frontend
+  npm i
+  npm test
+```
+Expected: 4 test files, 5 tests passing.
+
+### Notes
+- No network calls are made during tests. Axios is mocked where needed.
+- Recharts is mocked/stubbed to avoid jsdom limitations (ResizeObserver).
+- Backend work from previous step remains intact; frontend tests are isolated to the frontend workspace.
