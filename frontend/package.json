@@ -12,7 +12,10 @@
   "dependencies": {
     "axios": "^1.13.2",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "recharts": "^2.15.3",
+    "santa-budget-app": "file:..",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
