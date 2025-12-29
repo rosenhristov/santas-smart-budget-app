@@ -10,4 +10,6 @@ used during the development of Santa’s Smart Budget App.
 3. "Generate a professional starter repository structure for an AI-First BMAD project."
 4. "Generate a full starter repo for Santa’s Smart Budget App following BMAD."
 
-(All subsequent conversations are intentionally logged here for exam verification.)
+5. "Proceed with BMAD Implementation – Frontend"
+6. "Generate a React frontend scaffold for a budget tracking app"
+7. "Create React components for transactions, summaries, and charts"
